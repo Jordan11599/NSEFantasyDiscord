@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const embed = require("./embed.js");
-const fs = require("fs");
-const sqlite3 = require("sqlite3").verbose();
+const profiles = require("./profiles.js");
 const path = "../NSEFantasyBot/src/NSEdatabase.db";
 
 async function trySwitch(messageContent, targetChannel, message, err) {
@@ -19,12 +18,7 @@ async function trySwitch(messageContent, targetChannel, message, err) {
       err = false;
       break;
     case "player":
-      db = new sqlite3.Database(path, sqlite3.OPEN_READWRITE, (err) => {
-        if (err) {
-          return console.error(err.message);
-        }
-        targetChannel.send("Connected to the Item database.");
-      });
+      profiles.read(path, targetChannel);
       break;
     default:
       targetChannel.send(embed.errorMessage);
