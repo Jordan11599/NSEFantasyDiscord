@@ -25,11 +25,9 @@ async function trySwitch(messageClean, targetChannel, message, err) {
       break;
     case "player":
       if (primaryCommand != undefined) {
-        let primaryCommandInt = parseInt(primaryCommand);
-        if (primaryCommandInt > 0) {
+        if (parseInt(primaryCommand) > 0) {
           let data = profiles.getProfile(path, targetChannel, primaryCommand);
           console.log(`DATA: ${data}`);
-          // I need to print an embed
         } else {
           embed.errorMessage.setTitle("⛔ Error: Unknown Player ID");
           message.reply(embed.errorMessage);
