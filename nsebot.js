@@ -12,16 +12,15 @@ client.on("ready", () => {
   console.log("Connected as " + client.user.tag);
 
   //Setting activity: "Now listening to !help"
-  client.user.setActivity("!help", { type: "LISTENING" });
+  client.user.setActivity("!help | (ver1.0)", { type: "LISTENING" });
 });
 
 client.on("message", (message) => {
   messageClean = message.content.replace(/[\|&;\$%@"<>\(\)\+,]/g, "");
   let targetChannel = client.channels.cache.get(message.channel.id);
-  let messageContent = messageClean.substring(1);
 
   if (config.prefix === messageClean.charAt(0)) {
-    commands.trySwitch(messageContent, targetChannel, message, err);
+    commands.trySwitch(messageClean, targetChannel, message, err);
   }
 });
 
