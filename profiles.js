@@ -1,12 +1,13 @@
-const Discord = require("discord.js");
+const embed = require("./embed.js");
 const sqlite3 = require("sqlite3").verbose();
 
-function read(path, targetChannel) {
+function getProfile(path, targetChannel, steam64ID) {
   db = new sqlite3.Database(path, sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
       return console.error(err.message);
     }
-    const sqlRead = "SELECT * FROM players";
+    console.log(steam64ID);
+    const sqlRead = `SELECT * FROM players WHERE steam64ID = '${steam64ID}'`;
 
     db.all(sqlRead, [], (err, rows) => {
       if (err) return console.error(err.message);
@@ -25,4 +26,4 @@ function read(path, targetChannel) {
   });
 }
 
-module.exports.read = read;
+module.exports.getProfile = getProfile;
