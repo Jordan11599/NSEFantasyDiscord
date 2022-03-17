@@ -16,11 +16,13 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-  messageClean = message.content.replace(/[\|&;\$%@"<>\(\)\+,]/g, "");
-  let targetChannel = client.channels.cache.get(message.channel.id);
+  if (message.author.id != "945782607214440519") {
+    messageClean = message.content.replace(/[\|&;\$%@"<>\(\)\+,]/g, "");
+    let targetChannel = client.channels.cache.get(message.channel.id);
 
-  if (config.prefix === messageClean.charAt(0)) {
-    commands.trySwitch(messageClean, targetChannel, message, err);
+    if (config.prefix === messageClean.charAt(0)) {
+      commands.trySwitch(messageClean, targetChannel, message, err);
+    }
   }
 });
 
